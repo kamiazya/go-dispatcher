@@ -1,0 +1,53 @@
+digraph docker_lifecycle {
+    graph [
+        charset = "UTF-8";
+    ];
+
+    node [
+        shape = "circle";
+    ];
+
+    NONE [
+        style = "dashed",
+        shape = "box"
+    ];
+
+    Initial;
+
+    Started;
+
+    Stoped;
+
+    NONE -> Initial [
+        label = "New(), GenerateFromConfig(Config)";
+    ];
+
+    Initial -> Started [
+        label = "Start()";
+    ];
+
+    Started -> Stoped [
+        label = "Stop()";
+    ];
+
+
+    Initial_note [
+        label = "\lInitial is a state of Dispatcher that prepared to start.\lWarker was created and are not waiting for tasks.\lYou can dispatch Task even in the Initial state,\lbut if you try to dispatch a task \lthat exceeds the Queue's buffer size limit\lit will return ErrQueuesCap.";
+        shape = none;
+    ];
+
+    { rank=same; Initial; Initial_note;  };
+
+    Started_note [
+        label = "Started is a state of Dispatcher that is waiting for task to excute.";
+        shape = none;
+    ];
+
+    { rank=same; Started; Started_note;  };
+    Stoped_note [
+        label = "Stoped is a state of Dispatcher that is NOT waiting for task to excute.\lIf you dispatch task to that, you'll get ErrAlreadyStoped.\lTo dispatch more tasks, execute .Clone () to get the Dispatcher\lwith the same configuration as the Clone source in the initial state.";
+        shape = none;
+    ];
+
+    { rank=same; Stoped; Stoped_note;  };
+}
