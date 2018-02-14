@@ -1,4 +1,4 @@
-digraph docker_lifecycle {
+digraph dispatcher_lifecycle {
     graph [
         charset = "UTF-8";
     ];
@@ -10,16 +10,41 @@ digraph docker_lifecycle {
     NONE [
         style = "dashed",
         shape = "box"
+        group = -1;        
     ];
 
-    Initial;
+    CONFIG [
+        shape = "box";
+        group = 0;        
+    ];
 
-    Started;
+    SAME_CONFIG [
+        shape = "invhouse";
+        style = "dashed";
+        group = -1;
+        label = "Clone()";
+    ];
 
-    Stoped;
+    { rank=same; NONE; CONFIG; };
+
+    Initial [
+        group = 0;
+    ];
+
+    Started [
+        group = 0;
+    ];
+
+    Stoped [
+        group = 0;
+    ];
 
     NONE -> Initial [
-        label = "New(), GenerateFromConfig(Config)";
+        label = "New()";
+    ];
+
+    CONFIG -> Initial [
+        label = "GenerateFromConfig(Config)";
     ];
 
     Initial -> Started [
@@ -30,23 +55,46 @@ digraph docker_lifecycle {
         label = "Stop()";
     ];
 
+    Stoped -> SAME_CONFIG [
+        // style = "dotted";
+    ];
+
+    SAME_CONFIG -> Initial [
+        // style = "dotted";
+    ];
+
+    Initial_note -> Initial [
+        constraint = false;
+        dir = none;
+        style = "dashed";
+    ];
+    Started_note -> Started [
+        constraint = false;
+        dir = none;
+        style = "dashed";
+    ];
+    Stoped_note -> Stoped [
+        constraint = false;
+        dir = none;
+        style = "dashed";
+    ];
 
     Initial_note [
         label = "\lInitial is a state of Dispatcher that prepared to start.\lWarker was created and are not waiting for tasks.\lYou can dispatch Task even in the Initial state,\lbut if you try to dispatch a task \lthat exceeds the Queue's buffer size limit\lit will return ErrQueuesCap.";
-        shape = none;
+        shape = note;
     ];
 
-    { rank=same; Initial; Initial_note;  };
+    { rank=same; SAME_CONFIG; Initial; Initial_note;  };
 
     Started_note [
         label = "Started is a state of Dispatcher that is waiting for task to excute.";
-        shape = none;
+        shape = note;
     ];
 
     { rank=same; Started; Started_note;  };
     Stoped_note [
         label = "Stoped is a state of Dispatcher that is NOT waiting for task to excute.\lIf you dispatch task to that, you'll get ErrAlreadyStoped.\lTo dispatch more tasks, execute .Clone () to get the Dispatcher\lwith the same configuration as the Clone source in the initial state.";
-        shape = none;
+        shape = note;
     ];
 
     { rank=same; Stoped; Stoped_note;  };
