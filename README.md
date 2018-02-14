@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/kamiazya/go-dispatcher.svg?branch=master)](https://travis-ci.org/kamiazya/go-dispatcher)
 [![codecov.io](https://codecov.io/github/kamiazya/go-dispatcher/coverage.svg?branch=master)](https://codecov.io/github/kamiazya/go-dispatcher?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d53905c52749161e8345/maintainability)](https://codeclimate.com/github/kamiazya/go-dispatcher/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d53905c52749161e8345/test_coverage)](https://codeclimate.com/github/kamiazya/go-dispatcher/test_coverage)
 
 Package dispatcher implements a customizable Job Queue Dispatcher.
 
