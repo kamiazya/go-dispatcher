@@ -6,11 +6,11 @@ import (
 	"github.com/kamiazya/go-dispatcher"
 )
 
-// make sure to sampleDefaultLogger implementes Logger iterface.
-var _ dispatcher.Logger = &sampleDefaultLogger{}
+// make sure to sampleDefaultLogger implements Logger iterface.
+var _ dispatcher.Logger = (*sampleDefaultLogger)(nil)
 
 type sampleDefaultLogger struct {
-	// implementes Log and Error
+	// implements Log and Error
 	sampleLogger
 }
 

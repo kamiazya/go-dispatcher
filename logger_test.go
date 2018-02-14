@@ -1,6 +1,6 @@
 package dispatcher
 
-var _ Logger = &testLogger{}
+var _ Logger = (*testLogger)(nil)
 
 type testLogger struct{}
 

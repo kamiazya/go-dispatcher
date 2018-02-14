@@ -11,7 +11,7 @@ var (
 	errTestWorker = errors.New("test")
 )
 
-var _ Logger = &testLogger{}
+var _ Logger = (*testLogger)(nil)
 
 type workerTestLogger struct{}
 

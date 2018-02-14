@@ -1,6 +1,6 @@
 package dispatcher
 
-var _ Dispatcher = &dispatcher{}
+var _ Dispatcher = (*dispatcher)(nil)
 
 // Dispatche adds a given task to the queue of the dispatcher.
 func (d *dispatcher) Dispatche(t Task) error {

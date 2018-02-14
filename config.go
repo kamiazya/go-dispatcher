@@ -47,7 +47,7 @@ type Config struct {
 	MaxRetry int
 
 	// Logger is user custom logger
-	// impliments Logger interface.
+	// implements Logger interface.
 	Logger
 }
 

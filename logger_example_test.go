@@ -6,8 +6,8 @@ import (
 	"github.com/kamiazya/go-dispatcher"
 )
 
-// make sure to sampleLogger implementes Logger iterface.
-var _ dispatcher.Logger = &sampleLogger{}
+// make sure to sampleLogger implements Logger iterface.
+var _ dispatcher.Logger = (*sampleLogger)(nil)
 
 type sampleLogger struct{}
 
