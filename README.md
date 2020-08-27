@@ -53,7 +53,7 @@ d.Wait()
 
 ### From Config
 
-You can get Dispatcher whth Config like this.
+You can get Dispatcher with Config like this.
 
 ```go
 
